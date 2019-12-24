@@ -23,7 +23,15 @@ jobs:
     docker:
       - *default_docker_ruby_executor
     steps:
-      - checkout      
+      - checkout
+      # Install bundler
+      - run:
+          name: Install bundler
+          command: gem install bundler
+      # Which version of bundler?
+      - run:
+          name: Which bundler?
+          command: bundle -v
       # bundle cache
       - restore_cache:
           keys:
@@ -32,10 +40,6 @@ jobs:
       - run:
           name: Bundle Install
           command: bundle check || bundle install
-      # Which version of bundler?
-      - run:
-          name: Which bundler?
-          command: bundle -v
       # Store bundle cache
       - save_cache:
           key: rails-demo-bundle-v2-{{ checksum "Gemfile.lock" }}
