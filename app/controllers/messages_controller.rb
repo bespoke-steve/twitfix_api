@@ -17,10 +17,14 @@ class MessagesController < ApplicationController
     render json: @message
   end
 
-  def update
-    @message.update(message_params)
-    render json: @message
-  end
+  # Update this when you have a user_votes table.
+  # Currently, ANYBODY could aritrarily manipulate vote counts
+  #def update
+  #  @message = Message.find(params[:id])
+  #  @message.vote_count += params[:vote_increment].to_i
+  #  @message.save
+  #  render json: @message
+  #end
 
   def destroy
     @message.destroy
